@@ -59,6 +59,9 @@ public class StudentService {
      */
     public void assignClassroomToStudent(long studentId, Classroom classroom){
 
+        Student student = studentRepository.findById(studentId).get();
+        student.setClassroom(classroom);
+        studentRepository.save(student);
     }
 
     /**
@@ -69,8 +72,10 @@ public class StudentService {
      * @return the Classroom of the student
      */
     public Classroom getClassroomOfStudent(long studentId){
-        return null;
+        Student student = studentRepository.findById(studentId).get();
+        return student.getClassroom();
     }
+    
 
     /**
      * TODO: Provided the Id of an already existing student entity, unassign its classroom by setting the student
@@ -79,6 +84,9 @@ public class StudentService {
      * @param studentId Id of a persisted, existing student entity
      */
     public void unassignClassroomOfStudent(long studentId){
+        Student student = studentRepository.findById(studentId).get();
+        student.setClassroom(null);
+        studentRepository.save(student);
 
     }
 }
